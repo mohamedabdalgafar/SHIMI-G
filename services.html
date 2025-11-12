@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>خدمات وعروض - جيم الشيمي</title>
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="main-header">
+    <div class="container">
+      <h1 class="logo">جيم الشيمي</h1>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">الرئيسية</a></li>
+          <li><a href="services.html">الخدمات والعروض</a></li>
+          <li><a href="index.html#locations">الفروع والمواعيد</a></li>
+          <li><a href="index.html#contact">تواصل معنا</a></li>
+        </ul>
+      </nav>
+      <a href="services.html" class="btn">اشترك الآن!</a>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="services-page">
+    <div class="container">
+
+      <!-- Check Booking -->
+      <section id="check-booking-section">
+        <h3>استعلام عن الحجز</h3>
+        <p>أدخل رقم الإيصال أو رقم الاشتراك لمراجعة حالة الحجز:</p>
+        <input type="text" id="check-receipt-id" placeholder="رقم الإيصال / رقم الاشتراك" class="search-area input">
+        <button id="check-booking-btn" class="btn">استعلام</button>
+        <div id="check-booking-result"></div>
+      </section>
+
+      <!-- Services / Offers -->
+      <h2>🏆 خدمات وعروض جيم الشيمي</h2>
+      <p>اختر الخدمة أو العرض المناسب لك ثم انتقل لخطوات الدفع الآمنة.</p>
+      <div class="service-list" id="dynamic-services"></div>
+
+      <!-- Booking Form -->
+      <div class="booking-form-section" id="booking-section" style="display:none;">
+        <h3>تفاصيل الحجز والدفع</h3>
+        <form id="payment-form">
+          <div class="form-group">
+            <label>الخدمة المختارة:</label>
+            <input type="text" id="selected-service-display" readonly>
+            <input type="hidden" id="selected-service-price">
+          </div>
+
+          <div class="form-group">
+            <label for="full-name">الاسم الكامل: <span>*</span></label>
+            <input type="text" id="full-name" required>
+          </div>
+          <div class="form-group">
+            <label for="phone-number">رقم الهاتف: <span>*</span></label>
+            <input type="tel" id="phone-number" required>
+          </div>
+
+          <h4>اختر طريقة الدفع:</h4>
+          <div class="form-group payment-options">
+            <button type="button" id="btn-cash" class="btn" data-payment-type="cash">الدفع كاش في الجيم</button>
+            <button type="button" id="btn-vodafone" class="btn" data-payment-type="vodafone">فودافون كاش</button>
+            <button type="button" id="btn-instapay" class="btn" data-payment-type="instapay">إنستا باي (InstaPay)</button>
+          </div>
+
+          <div id="cash-details" style="display:none;">
+            <p>سيتم تأكيد اشتراكك بعد زيارتك للجيم والدفع النقدي خلال 48 ساعة.</p>
+            <button type="button" class="btn" data-payment-type="cash">تأكيد الحجز والدفع لاحقاً</button>
+          </div>
+
+          <div id="vodafone-details" style="display:none;">
+            <p>برجاء تحويل المبلغ إلى رقم فودافون كاش التالي:</p>
+            <strong>رقم الدفع: 010XXXXXXX</strong>
+            <input type="file" id="vodafone-receipt" accept="image/*">
+            <button type="button" class="btn" data-payment-type="vodafone">إتمام الحجز ومراجعة الدفع</button>
+          </div>
+
+          <div id="instapay-details" style="display:none;">
+            <p>برجاء التحويل إلى معرف الدفع التالي (IPA):</p>
+            <strong>معرف الدفع: Alshimi.Gym@instapay</strong>
+            <input type="file" id="instapay-receipt" accept="image/*">
+            <button type="button" class="btn" data-payment-type="instapay">إتمام الحجز ومراجعة الدفع</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+    <!-- Confirmation / Message Modal -->
+    <div id="popup-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:9999;">
+        <div style="background:#fff; padding:20px; border-radius:10px; max-width:400px; width:90%; text-align:center; position:relative;">
+            <span id="popup-close" style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:20px;">&times;</span>
+            <h3 id="popup-title"></h3>
+            <p id="popup-message"></p>
+        </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container">
+      <p>&copy; 2025 جيم الشيمي. جميع الحقوق محفوظة.</p>
+      <div class="contact-info">
+        <span>📍 العنوان: شارع [اسم الشارع] - [اسم المنطقة]</span>
+        <span>📞 الهاتف: 010xxxxxxxx</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script type="module" src="services.js"></script>
+
+</body>
+</html>

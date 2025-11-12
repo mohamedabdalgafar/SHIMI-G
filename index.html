@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جيم الشيمي - ابدأ رحلة لياقتك</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
+        .service-cards { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px; }
+        
+        .btn-card { display: inline-block; margin-top: 10px; padding: 5px 10px; background:#6a5555; color:white; text-decoration:none; border:2px solid; }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <h1 class="logo">جيم الشيمي</h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li><a href="services.html">الخدمات والعروض</a></li>
+                    <li><a href="#locations">الفروع والمواعيد</a></li>
+                    <li><a href="#contact">تواصل معنا</a></li>
+                </ul>
+            </nav>
+            <a href="services.html" class="btn btn-primary">اشترك الآن!</a>
+        </div>
+    </header>
+
+    <section id="home" class="hero-section">
+        <div class="container">
+            <h2>المكان الأمثل لتحقيق أهدافك اللياقية</h2>
+            <p>انضم إلينا اليوم واستفد من أحدث المعدات وأفضل المدربين لتبدأ التحول.</p>
+            <a href="services.html" class="btn btn-secondary">تصفح العروض والخدمات</a>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <div class="container">
+            <h3>لماذا تختار جيم الشيمي؟</h3>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h4>معدات حديثة</h4>
+                    <p>أحدث أجهزة التدريب التي تضمن لك أقصى استفادة وأمان.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>مدربون محترفون</h4>
+                    <p>فريق من المدربين المعتمدين لمساعدتك في كل خطوة.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>بيئة مشجعة</h4>
+                    <p>أجواء حماسية ونظافة فائقة لتدريب مريح وممتع.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-preview">
+        <div class="container">
+            <h3>خدماتنا الأكثر شعبية</h3>
+            <div class="service-cards" id="offers-container">
+                <!-- Offers will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 جيم الشيمي. جميع الحقوق محفوظة.</p>
+            <div class="contact-info">
+                <span>📍 العنوان: شارع [اسم الشارع] - [اسم المنطقة]</span>
+                <span>📞 الهاتف: 010xxxxxxxx</span>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBAD6ShMPzY2vE_aSs6R3f8BiANMVGw5k0",
+            authDomain: "shimi-gem.firebaseapp.com",
+            databaseURL: "https://shimi-gem-default-rtdb.firebaseio.com",
+            projectId: "shimi-gem",
+            storageBucket: "shimi-gem.appspot.com",
+            messagingSenderId: "102001010471",
+            appId: "1:102001010471:web:58e2faf4b6793d7ac32b02",
+            measurementId: "G-1QXKEFKS3G"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const offersRef = ref(db, "offers");
+        const offersContainer = document.getElementById("offers-container");
+
+        onValue(offersRef, (snapshot) => {
+            offersContainer.innerHTML = "";
+            snapshot.forEach((child) => {
+                const offer = child.val();
+                if (offer.active) { // only show active offers
+                    const div = document.createElement("div");
+                    div.classList.add("card", "offer");
+                    div.innerHTML = `
+                        <h4>${offer.name}</h4>
+                        <p>${offer.desc}</p>
+                        <p><strong>السعر: ${offer.price} جنيه مصري</strong></p>
+                        <a href="services.html" class="btn-card">المزيد..!</a>
+                    `;
+                    offersContainer.appendChild(div);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

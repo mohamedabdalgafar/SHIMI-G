@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة تحكم الإدارة - جيم الشيمي</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .container { max-width: 1200px; margin: auto; padding: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+    th, td { border: 1px solid #ccc; padding: 10px; text-align: right; }
+    th { background: #eee; }
+    .btn { cursor: pointer; padding: 5px 10px; margin: 2px; border-radius: 5px; }
+    .btn-primary { background: #007bff; color: white; border: none; }
+    .btn-danger { background: #dc3545; color: white; border: none; }
+    .btn-secondary { background: #6c757d; color: white; border: none; }
+    .modal { position: fixed; top:0; left:0; width:100%; height:100%; display:flex; justify-content:center; align-items:center; background: rgba(0,0,0,0.5); display:none; }
+    .modal-content { background:white; padding:20px; border-radius:10px; width:90%; max-width:500px; }
+    input[type="text"], input[type="password"], textarea, input[type="number"] { width:100%; padding:5px; margin-bottom:10px; }
+    .checkbox-center { text-align:center; }
+    #search-bookings { width: 300px; padding:5px; margin-bottom:10px; }
+  </style>
+</head>
+<body>
+
+<!-- Login Modal -->
+<div id="login-modal" class="modal" style="display:flex;">
+  <div class="modal-content">
+    <h3>تسجيل الدخول</h3>
+    <label>اسم المستخدم:</label>
+    <input type="text" id="login-username">
+    <label>كلمة المرور:</label>
+    <input type="password" id="login-password">
+    <div style="margin-top:15px;">
+      <button id="login-btn" class="btn btn-primary">تسجيل الدخول</button>
+    </div>
+  </div>
+</div>
+
+<!-- Admin Content (hidden until login) -->
+<div id="admin-content" style="display:none;" class="container">
+  <h2>لوحة تحكم الإدارة - جيم الشيمي</h2>
+
+  <!-- Subscriptions / Bookings -->
+  <section>
+    <h3>إدارة الاشتراكات / الحجوزات</h3>
+    <input type="text" id="search-bookings" placeholder="ابحث برقم الإيصال أو الاسم...">
+    <table id="admin-subscriptions-table">
+      <thead>
+        <tr>
+          <th>رقم الإيصال</th>
+          <th>العميل ورقم الهاتف</th>
+          <th>الخدمة</th>
+          <th>طريقة الدفع</th>
+          <th>تاريخ الحجز</th>
+          <th>الحالة</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <hr>
+
+  <!-- Offers / Services -->
+  <section>
+    <h3>إدارة العروض والخدمات</h3>
+    <table id="admin-offers-table">
+      <thead>
+        <tr>
+          <th>اسم الخدمة/العرض</th>
+          <th>الوصف</th>
+          <th>السعر</th>
+          <th>فعال</th>
+          <th>إجراءات</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <button id="add-offer-btn" class="btn btn-primary">إضافة عرض جديد</button>
+  </section>
+</div>
+
+<!-- Modal for Add/Edit Offer -->
+<div id="offer-modal" class="modal">
+  <div class="modal-content">
+    <h3 id="offer-modal-title">إضافة/تعديل عرض</h3>
+    <label>اسم الخدمة/العرض:</label>
+    <input type="text" id="offer-name">
+    <label>الوصف:</label>
+    <textarea id="offer-desc" rows="3"></textarea>
+    <label>السعر:</label>
+    <input type="number" id="offer-price">
+    <label>فعال (ظاهر على الموقع)؟</label>
+    <input type="checkbox" id="offer-active">
+    <div style="margin-top:15px;">
+      <button id="save-offer-btn" class="btn btn-primary">حفظ</button>
+      <button id="close-offer-modal-btn" class="btn btn-danger">إغلاق</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="admin.js"></script>
+</body>
+</html>
